@@ -1,0 +1,6 @@
+[package]
+authors = ["오병진 <qudwls185@naver.com>"]
+edition = "2021"
+name = "event_emitter"
+version = "0.0.1"
+description = "Rewrite it in Rust"
