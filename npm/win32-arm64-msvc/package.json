@@ -1,5 +1,5 @@
 {
-  "name": "@sunrabbit/event-emitter-win32-arm64-msvc",
+  "name": "@sunrabbit/events-win32-arm64-msvc",
   "version": "0.0.0",
   "os": [
     "win32"
@@ -7,9 +7,9 @@
   "cpu": [
     "arm64"
   ],
-  "main": "event-emitter.win32-arm64-msvc.node",
+  "main": "events.win32-arm64-msvc.node",
   "files": [
-    "event-emitter.win32-arm64-msvc.node"
+    "events.win32-arm64-msvc.node"
   ],
   "license": "MIT",
   "engines": {

@@ -68,9 +68,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sunrabbit/event-emitter@workspace:.":
+"@sunrabbit/events@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@sunrabbit/event-emitter@workspace:."
+  resolution: "@sunrabbit/events@workspace:."
   dependencies:
     "@napi-rs/cli": ^2.15.2
     ava: ^5.1.1

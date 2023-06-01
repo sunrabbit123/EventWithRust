@@ -1,5 +1,5 @@
 {
-  "name": "@sunrabbit/event-emitter-freebsd-x64",
+  "name": "@sunrabbit/events-freebsd-x64",
   "version": "0.0.0",
   "os": [
     "freebsd"
@@ -7,9 +7,9 @@
   "cpu": [
     "x64"
   ],
-  "main": "event-emitter.freebsd-x64.node",
+  "main": "events.freebsd-x64.node",
   "files": [
-    "event-emitter.freebsd-x64.node"
+    "events.freebsd-x64.node"
   ],
   "license": "MIT",
   "engines": {

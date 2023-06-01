@@ -1,12 +1,12 @@
 {
-  "name": "@sunrabbit/event-emitter-darwin-universal",
+  "name": "@sunrabbit/events-darwin-universal",
   "version": "0.0.0",
   "os": [
     "darwin"
   ],
-  "main": "event-emitter.darwin-universal.node",
+  "main": "events.darwin-universal.node",
   "files": [
-    "event-emitter.darwin-universal.node"
+    "events.darwin-universal.node"
   ],
   "license": "MIT",
   "engines": {

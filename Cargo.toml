@@ -1,6 +1,6 @@
 [package]
 edition = "2021"
-name = "sunrabbit_event-emitter"
+name = "sunrabbit_events"
 version = "0.0.0"
 
 [lib]

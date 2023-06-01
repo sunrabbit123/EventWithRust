@@ -1,3 +1,3 @@
-# `@sunrabbit/event-emitter-darwin-arm64`
+# `@sunrabbit/events-darwin-arm64`
 
-This is the **aarch64-apple-darwin** binary for `@sunrabbit/event-emitter`
+This is the **aarch64-apple-darwin** binary for `@sunrabbit/events`

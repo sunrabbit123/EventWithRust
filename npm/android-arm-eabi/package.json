@@ -1,5 +1,5 @@
 {
-  "name": "@sunrabbit/event-emitter-android-arm-eabi",
+  "name": "@sunrabbit/events-android-arm-eabi",
   "version": "0.0.0",
   "os": [
     "android"
@@ -7,9 +7,9 @@
   "cpu": [
     "arm"
   ],
-  "main": "event-emitter.android-arm-eabi.node",
+  "main": "events.android-arm-eabi.node",
   "files": [
-    "event-emitter.android-arm-eabi.node"
+    "events.android-arm-eabi.node"
   ],
   "license": "MIT",
   "engines": {

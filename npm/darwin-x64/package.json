@@ -1,5 +1,5 @@
 {
-  "name": "@sunrabbit/event-emitter-darwin-x64",
+  "name": "@sunrabbit/events-darwin-x64",
   "version": "0.0.0",
   "os": [
     "darwin"
@@ -7,9 +7,9 @@
   "cpu": [
     "x64"
   ],
-  "main": "event-emitter.darwin-x64.node",
+  "main": "events.darwin-x64.node",
   "files": [
-    "event-emitter.darwin-x64.node"
+    "events.darwin-x64.node"
   ],
   "license": "MIT",
   "engines": {

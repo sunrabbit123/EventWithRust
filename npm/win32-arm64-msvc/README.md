@@ -1,3 +1,3 @@
-# `@sunrabbit/event-emitter-win32-arm64-msvc`
+# `@sunrabbit/events-win32-arm64-msvc`
 
-This is the **aarch64-pc-windows-msvc** binary for `@sunrabbit/event-emitter`
+This is the **aarch64-pc-windows-msvc** binary for `@sunrabbit/events`

@@ -1,5 +1,5 @@
 {
-  "name": "@sunrabbit/event-emitter-android-arm64",
+  "name": "@sunrabbit/events-android-arm64",
   "version": "0.0.0",
   "os": [
     "android"
@@ -7,9 +7,9 @@
   "cpu": [
     "arm64"
   ],
-  "main": "event-emitter.android-arm64.node",
+  "main": "events.android-arm64.node",
   "files": [
-    "event-emitter.android-arm64.node"
+    "events.android-arm64.node"
   ],
   "license": "MIT",
   "engines": {

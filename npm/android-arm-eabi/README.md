@@ -1,3 +1,3 @@
-# `@sunrabbit/event-emitter-android-arm-eabi`
+# `@sunrabbit/events-android-arm-eabi`
 
-This is the **armv7-linux-androideabi** binary for `@sunrabbit/event-emitter`
+This is the **armv7-linux-androideabi** binary for `@sunrabbit/events`

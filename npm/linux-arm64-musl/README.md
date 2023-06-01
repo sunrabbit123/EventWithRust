@@ -1,3 +1,3 @@
-# `@sunrabbit/event-emitter-linux-arm64-musl`
+# `@sunrabbit/events-linux-arm64-musl`
 
-This is the **aarch64-unknown-linux-musl** binary for `@sunrabbit/event-emitter`
+This is the **aarch64-unknown-linux-musl** binary for `@sunrabbit/events`

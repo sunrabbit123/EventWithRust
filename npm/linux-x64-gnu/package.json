@@ -1,5 +1,5 @@
 {
-  "name": "@sunrabbit/event-emitter-linux-x64-gnu",
+  "name": "@sunrabbit/events-linux-x64-gnu",
   "version": "0.0.0",
   "os": [
     "linux"
@@ -7,9 +7,9 @@
   "cpu": [
     "x64"
   ],
-  "main": "event-emitter.linux-x64-gnu.node",
+  "main": "events.linux-x64-gnu.node",
   "files": [
-    "event-emitter.linux-x64-gnu.node"
+    "events.linux-x64-gnu.node"
   ],
   "license": "MIT",
   "engines": {
