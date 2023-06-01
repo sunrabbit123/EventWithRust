@@ -1,0 +1,15 @@
+{
+  "name": "@sunrabbit/event-emitter-darwin-universal",
+  "version": "0.0.0",
+  "os": [
+    "darwin"
+  ],
+  "main": "event-emitter.darwin-universal.node",
+  "files": [
+    "event-emitter.darwin-universal.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  }
+}
