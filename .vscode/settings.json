@@ -1,3 +1,19 @@
 {
-  "rust-analyzer.linkedProjects": [".\\crates\\event-emitter\\Cargo.toml"]
+  "rust-analyzer.linkedProjects": [".\\crates\\event_emitter\\Cargo.toml"],
+  "git.detectSubmodules": false,
+  "rust-analyzer.diagnostics.disabled": [
+    "unresolved-import",
+    "unresolved-extern-crate",
+    "missing-ok-in-tail-expr",
+    "mismatched-arg-count",
+    "macro-error",
+    "incorrect-ident-case",
+    "no-such-field",
+    "missing-structure-fields"
+  ],
+  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.diagnostics.enable": false,
+  "rust-analyzer.check.command": "clippy",
+  "debug.allowBreakpointsEverywhere": true,
+  "rust-analyzer.debug.openDebugPane": true
 }
