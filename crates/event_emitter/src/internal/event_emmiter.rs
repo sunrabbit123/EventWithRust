@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 use crate::EventEmitter;
 
 impl Default for EventEmitter {
@@ -10,15 +8,6 @@ impl Default for EventEmitter {
             default_max_listeners: 10,
             events: Default::default(),
         }
-    }
-}
-
-impl Clone for EventEmitter {
-    fn clone(&self) -> Self {
-        let mut events = HashMap::new();
-        events.clear();
-        events.extend(self.events.into_iter());
-        Self { using_domains: self.using_domains.clone(), default_max_listeners: self.default_max_listeners.clone(), events }
     }
 }
 
