@@ -18,18 +18,18 @@ pub struct EventEmitter {
 #[napi]
 impl EventEmitter {
     #[napi(ts_args_type = "name : string, listener : (...args : any[]) => void")]
-    pub fn add_listener(&mut self, name: String, listener: JsFunction, prepend: Option<bool>) {
-        match self.events.get_mut(&name) {
-            Some(events) => {
-                if let Some(true) = prepend {
-                    events.insert(0, listener);
-                } else {
-                    events.push(listener);
-                }
-            }
-            None => {
-                self.events.insert(name.to_string(), vec![listener]);
-            }
+    pub fn add_listener(&mut self, this: This,js_env: Env, name: String, listener: JsFunction, prepend: Option<bool>) {
+        match this.get_named_property::<Vec<JsFunction>>("@events") {
+            Ok(events) => {
+                events.insert(0, listener);
+            },
+            Err(e) => {
+                dbg!(e.reason);
+                let property_name = js_env.create_string(&name).unwrap();
+                let arr = js_env.create_array(1).unwrap();
+                arr.insert(listener);
+                this.set_property(property_name, arr.coerce_to_object().unwrap());
+            },
         }
     }
 
@@ -68,7 +68,7 @@ impl EventEmitter {
         let event_name = js_env.create_string(&name).unwrap();
         self.events.remove(&name);
         if let Some(events) = self.events.get("removeListener") {
-            let _ = events.iter().map(|f| call_event(f, None, event_name, &listener));
+            let _ = events.iter().map(|f| call_event(f, None, event_name, listener));
         }
     }
 }
