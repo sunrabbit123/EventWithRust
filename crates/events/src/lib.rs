@@ -1,6 +1,6 @@
 #![deny(clippy::all)]
 
-use event_emitter::EventEmitter;
+
 
 #[macro_use]
 extern crate napi_derive;

@@ -1,10 +1,8 @@
 #[macro_use]
 extern crate napi_derive;
 
-use std::collections::HashMap;
-
 use internal::js_function::call_event;
-use napi::{Env, JsFunction, JsObject, bindgen_prelude::This};
+use napi::{bindgen_prelude::{This, Array}, Env, JsFunction, JsObject};
 
 pub mod internal;
 
@@ -12,65 +10,99 @@ pub mod internal;
 pub struct EventEmitter {
     pub using_domains: bool,
     pub default_max_listeners: i32,
-    pub events: HashMap<String, Vec<JsFunction>>,
 }
 
 #[napi]
 impl EventEmitter {
     #[napi(ts_args_type = "name : string, listener : (...args : any[]) => void")]
-    pub fn add_listener(&mut self, this: This,js_env: Env, name: String, listener: JsFunction, prepend: Option<bool>) {
-        match this.get_named_property::<Vec<JsFunction>>("@events") {
-            Ok(events) => {
-                events.insert(0, listener);
-            },
-            Err(e) => {
-                dbg!(e.reason);
+    pub fn add_listener(&mut self, mut this: This, js_env: Env, name: String, listener: JsFunction) {
+        match this.get_named_property::<JsObject>("@events") {
+            Ok(mut events_map) => {
                 let property_name = js_env.create_string(&name).unwrap();
-                let arr = js_env.create_array(1).unwrap();
-                arr.insert(listener);
-                this.set_property(property_name, arr.coerce_to_object().unwrap());
-            },
+
+                if let Ok(mut origin) = events_map.get_named_property::<Array>(&name) {
+                    let _ = origin.insert(listener);
+                    let _ = events_map.set_property(property_name, origin.coerce_to_object().unwrap());
+                } else {
+                    let mut arr = js_env.create_array(1).unwrap();
+                    let _ = arr.set(0, listener);
+                    let _ = this.set_property(property_name, arr.coerce_to_object().unwrap());
+                }
+            }
+            Err(e) => {
+                dbg!(&e.reason);
+                let obj = js_env.create_object().unwrap();
+                let property_name = js_env.create_string("@events").unwrap();
+                let _ = this.set_property(property_name, obj);
+            }
         }
     }
 
-    #[napi]
-    pub fn emit(&self, this: This, name: String, data: Vec<JsObject>) -> bool {
-        let events_option = self.events.get(&name);
+    #[napi(ts_args_type = "name : string, listener : (...args : any[]) => void")]
+    pub fn on(&mut self, mut this: This, js_env: Env, name: String, listener: JsFunction) {
+        match this.get_named_property::<JsObject>("@events") {
+            Ok(mut events_map) => {
+                let property_name = js_env.create_string(&name).unwrap();
 
-        if let Some(events) = events_option {
-            let _ = events.iter().map(|f| f.call(None, &data));
-        }
-        events_option.is_some()
-    }
-
-    #[napi]
-    pub fn events_names(&self) -> Vec<String> {
-        self.events.keys().map(|v| v.to_owned()).collect()
-    }
-
-    #[napi]
-    pub fn listener_count(&self, name: String) -> u32 {
-        self.events.get(&name).map(|v| v.len()).unwrap_or_else(|| 0).try_into().unwrap()
-    }
-
-    #[napi]
-    pub fn set_max_listeners(&mut self, n: i32) {
-        self.default_max_listeners = n;
-    }
-
-    #[napi]
-    pub fn get_max_listeners(&self) -> i32 {
-        self.default_max_listeners
-    }
-
-    #[napi]
-    pub fn off(&mut self, js_env: Env, name: String, listener: JsFunction) {
-        let event_name = js_env.create_string(&name).unwrap();
-        self.events.remove(&name);
-        if let Some(events) = self.events.get("removeListener") {
-            let _ = events.iter().map(|f| call_event(f, None, event_name, listener));
+                if let Ok(mut origin) = events_map.get_named_property::<Array>(&name) {
+                    let _ = origin.insert(listener);
+                    let _ = events_map.set_property(property_name, origin.coerce_to_object().unwrap());
+                } else {
+                    let mut arr = js_env.create_array(1).unwrap();
+                    let _ = arr.set(0, listener);
+                    let _ = this.set_property(property_name, arr.coerce_to_object().unwrap());
+                }
+            }
+            Err(e) => {
+                dbg!(&e.reason);
+                let obj = js_env.create_object().unwrap();
+                let property_name = js_env.create_string("@events").unwrap();
+                let _ = this.set_property(property_name, obj);
+            }
         }
     }
+
+
+    #[napi(ts_args_type = "name : string, args : any[]")]
+    pub fn emit(&self, this: This, name: String, args: Vec<JsObject>) -> bool {
+        if let Ok(events_map) = this.get_named_property::<JsObject>("@events") {
+            if let Ok(events) = events_map.get_named_property::<Vec<JsFunction>>(&name) {
+                let _ = events.iter().map(|f| f.call(None, &args));
+            }
+            true
+        } else {
+            false
+        }
+    }
+
+    // #[napi]
+    // pub fn events_names(&self) -> Vec<String> {
+    //     self.events.keys().map(|v| v.to_owned()).collect()
+    // }
+
+    // #[napi]
+    // pub fn listener_count(&self, name: String) -> u32 {
+    //     self.events.get(&name).map(|v| v.len()).unwrap_or_else(||
+    // 0).try_into().unwrap() }
+
+    // #[napi]
+    // pub fn set_max_listeners(&mut self, n: i32) {
+    //     self.default_max_listeners = n;
+    // }
+
+    // #[napi]
+    // pub fn get_max_listeners(&self) -> i32 {
+    //     self.default_max_listeners
+    // }
+
+    // #[napi]
+    // pub fn off(&mut self, js_env: Env, name: String, listener: JsFunction) {
+    //     let event_name = js_env.create_string(&name).unwrap();
+    //     self.events.remove(&name);
+    //     if let Some(events) = self.events.get("removeListener") {
+    //         let _ = events.iter().map(|f| call_event(f, None, event_name,
+    // listener));     }
+    // }
 }
 
 // #[cfg(test)]

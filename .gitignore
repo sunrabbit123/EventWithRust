@@ -187,7 +187,7 @@ $RECYCLE.BIN/
 Cargo.lock
 
 .pnp.*
-.yarn/*
+**/.yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases

@@ -6,7 +6,6 @@ impl Default for EventEmitter {
         EventEmitter {
             using_domains: false,
             default_max_listeners: 10,
-            events: Default::default(),
         }
     }
 }
